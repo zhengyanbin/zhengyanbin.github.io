@@ -57,29 +57,33 @@
   };
 </script>
 
-  <meta name="keywords" content="Java,JavaEE,Linux,Python,SQL,C#,服务端,架构,微服务">
-<meta property="og:type" content="website">
-<meta property="og:title" content="新起点">
-<meta property="og:url" content="https://blog.theclouds.top/index.html">
+  <meta name="description" content="最近项目需要使用xsd对xml进行预校验，于是封装了一个工具类，来完成校验工作。">
+<meta name="keywords" content="java,xsd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Java中使用xsd校验xml">
+<meta property="og:url" content="https://blog.theclouds.top/articles/use-schema-validate-xml-document-in-java/index.html">
 <meta property="og:site_name" content="新起点">
+<meta property="og:description" content="最近项目需要使用xsd对xml进行预校验，于是封装了一个工具类，来完成校验工作。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-04-17T09:00:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新起点">
-  <link rel="canonical" href="https://blog.theclouds.top/">
+<meta name="twitter:title" content="在Java中使用xsd校验xml">
+<meta name="twitter:description" content="最近项目需要使用xsd对xml进行预校验，于是封装了一个工具类，来完成校验工作。">
+  <link rel="canonical" href="https://blog.theclouds.top/articles/use-schema-validate-xml-document-in-java/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>新起点</title>
+  <title>在Java中使用xsd校验xml | 新起点</title>
   
 
 
@@ -264,12 +268,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="https://blog.theclouds.top/articles/use-schema-validate-xml-document-in-java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -282,9 +287,8 @@
       <meta itemprop="name" content="新起点">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/articles/use-schema-validate-xml-document-in-java/" class="post-title-link" itemprop="url">在Java中使用xsd校验xml</a>
+        <h1 class="post-title" itemprop="name headline">在Java中使用xsd校验xml
+
           
         </h1>
 
@@ -317,6 +321,14 @@
           
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
         </div>
       </header>
@@ -327,221 +339,111 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近项目需要使用xsd对xml进行预校验，于是封装了一个工具类，来完成校验工作。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/articles/use-schema-validate-xml-document-in-java/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
+        <p>最近项目需要使用xsd对xml进行预校验，于是封装了一个工具类，来完成校验工作。<a id="more"></a><br>完整代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.StringReader;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Locale;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.XMLConstants;</span><br><span class="line"><span class="keyword">import</span> javax.xml.transform.stream.StreamSource;</span><br><span class="line"><span class="keyword">import</span> javax.xml.validation.Schema;</span><br><span class="line"><span class="keyword">import</span> javax.xml.validation.SchemaFactory;</span><br><span class="line"><span class="keyword">import</span> javax.xml.validation.Validator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.xml.sax.ErrorHandler;</span><br><span class="line"><span class="keyword">import</span> org.xml.sax.SAXException;</span><br><span class="line"><span class="keyword">import</span> org.xml.sax.SAXParseException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiSchemaValidator</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line"><span class="comment">//	private static final Logger logger = LoggerFactory.getLogger(MultiSchemaValidator.class);</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		System.setProperty(<span class="string">"jdk.xml.maxOccurLimit"</span>, <span class="string">"9999"</span>);    <span class="comment">//默认的maxOccur为5000，而我们项目中要求9999</span></span><br><span class="line">		Locale.setDefault(Locale.CHINA);    <span class="comment">//如果项目不考虑国际化的话</span></span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;SAXParseException&gt; <span class="title">validateXMLSchema</span><span class="params">(String xsdPath, String xml)</span></span>&#123;</span><br><span class="line">		<span class="keyword">final</span> List&lt;SAXParseException&gt; errors = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            SchemaFactory factory = </span><br><span class="line">                    SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);</span><br><span class="line">            String path = Thread.currentThread().getContextClassLoader().getResource(<span class="string">""</span>).getPath();</span><br><span class="line">            Schema schema = factory.newSchema(<span class="keyword">new</span> File(path + xsdPath));</span><br><span class="line">            Validator validator = schema.newValidator();</span><br><span class="line">            validator.setErrorHandler(<span class="keyword">new</span> ErrorHandler() &#123;</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">warning</span><span class="params">(SAXParseException exception)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line"><span class="comment">//					logger.debug("warning ex", exception);</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fatalError</span><span class="params">(SAXParseException exception)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line"><span class="comment">//					logger.debug("fatalError ex", exception);</span></span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">error</span><span class="params">(SAXParseException exception)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line"><span class="comment">//					logger.debug("error ex", exception);</span></span><br><span class="line">					errors.add(exception);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">            validator.validate(<span class="keyword">new</span> StreamSource(<span class="keyword">new</span> StringReader(xml)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException | SAXException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Exception: "</span>+e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> errors;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//测试代码</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String schemaURI = <span class="string">"xsd/Manifest.xsd"</span>;</span><br><span class="line">        String xml = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        List&lt;SAXParseException&gt; errors = validateXMLSchema(schemaURI, xml);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(SAXParseException ex : errors)&#123;</span><br><span class="line">			System.out.println(ex.getLineNumber() + <span class="string">"行,"</span> + ex.getColumnNumber() + <span class="string">"列,"</span> + ex.getMessage());</span><br><span class="line">		&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该代码应该可以完成一般需求。不过需要注意以下问题：</p>
+<ol>
+<li>xsd中使用<code>&lt;xs:import&gt;</code> <code>&lt;xs:include&gt;</code> 引入其他xsd文件时，不要将xsd打包到jar中，这种方式不支持jar!的方式访问import文件。</li>
+<li>jdk有xml-apis及其实现，但是尝试覆盖其<code>XMLSchemaMessages.properties</code>以便自定义提示语句时出现问题，便引用了 <code>xml-apis</code> 及 <code>xercesImpl</code>,覆盖了<code>org.apache.xerces.impl.msg</code>包下的properties文件。</li>
+<li>上述代码可以完成多schema文件的校验，需保证xsd都在相同路径。若不在同一位置，可参考链接中博客的方式，实现<a href="http://blog.csdn.net/hld_hepeng/article/details/6318663" target="_blank" rel="noopener">SchemaFactory解析shcema</a>的处理操作。</li>
+</ol>
+</blockquote>
+
     </div>
 
     
     
     
-      <footer class="post-footer">
-          <div class="post-eof"></div>
         
-      </footer>
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="zhengyanbin 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="zhengyanbin 支付宝">
+        <p>支付宝</p>
+      </div>
+
   </div>
-  
-  
-  
-  </article>
+</div>
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://blog.theclouds.top/articles/the-log-files-of-tomcat/">
+      
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhengyanbin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zhengyanbin</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.theclouds.top/articles/use-schema-validate-xml-document-in-java/" title="在Java中使用xsd校验xml">https://blog.theclouds.top/articles/use-schema-validate-xml-document-in-java/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="新起点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+      
+
+      <footer class="post-footer">
+          
             
-            <a href="/articles/the-log-files-of-tomcat/" class="post-title-link" itemprop="url">tomcat下各日志文件的说明</a>
           
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2017-04-15 17:00:37" itemprop="dateCreated datePublished" datetime="2017-04-15T17:00:37+08:00">2017-04-15</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;今天同事在使用tomcat发布项目的时候，遇到个问题，导致项目一直无法启动，查看tomcat控制台输出，发现启动日志仅有一句描述：<code>严重: One or more listeners failed to start. Full details will be found in the appropriate container log file</code>，第一时间认为是spring容器初始化失败，那么把spring加载配置文件及初始化的日志级别调整为debug不就万事大吉了么。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/articles/the-log-files-of-tomcat/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://blog.theclouds.top/articles/how-to-install-httpd-on-linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhengyanbin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="新起点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+          <div class="post-tags">
             
-            <a href="/articles/how-to-install-httpd-on-linux/" class="post-title-link" itemprop="url">在linux中使用源码安装httpd服务器</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2017-03-08 11:21:10" itemprop="dateCreated datePublished" datetime="2017-03-08T11:21:10+08:00">2017-03-08</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前天在Centos中安装了Apache的httpd，安装的机器在公司内网，于是选择了源码进行安装。俗话说好记性不如烂笔头，现将安装过程进行记录，也希望能帮到各位网友。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/articles/how-to-install-httpd-on-linux/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+              <a href="/tags/java/" rel="tag"># java</a>
+            
+              <a href="/tags/xsd/" rel="tag"># xsd</a>
+            
+          </div>
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/articles/the-log-files-of-tomcat/" rel="next" title="tomcat下各日志文件的说明">
+                  <i class="fa fa-chevron-left"></i> tomcat下各日志文件的说明
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
   </div>
-
-  
 
 
           </div>
           
+    
+    <div class="comments" id="gitalk-container"></div>
+  
 
         </div>
           
@@ -556,6 +458,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -806,19 +713,29 @@ window.addEventListener('pjax:success', () => {
   
 
   
-    
-      
-    
-      
-    
-      
-    
-  
 
   
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '9f0924da3df307589833',
+      clientSecret: 'c4e95aa7e43085f9f27984b1279f12e49bb1f4a7',
+      repo: 'zhengyanbin.github.io',
+      owner: 'zhengyanbin',
+      admin: ['zhengyanbin'],
+      id: '8a9462f11698eb545ecf46aa77cf880b',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
     </div>
 </body>
