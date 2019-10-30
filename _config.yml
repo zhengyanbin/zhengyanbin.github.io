@@ -88,3 +88,33 @@ deploy:
   type: git
   repo: https://github.com/zhengyanbin/zhengyanbin.github.io.git
   branch: master
+
+# hexo-neat
+# 博文压缩
+neat_enable: true
+# 压缩html
+neat_html:
+  enable: true
+  exclude:
+# 压缩css  
+neat_css:
+  enable: true
+  exclude:
+    - '**/*.min.css'
+    - '**/*.mini.css'
+# 压缩js
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '**/*.min.js'
+    - '**/*.mini.js'
+    - '**/jquery.fancybox.pack.js'
+    - '**/js/utils.js'
+    - '**/js/schemes/pisces.js'
+    - '**/js/next-boot.js'
+    - '**/js/bookmark.js'
+    - '**/js/local-search.js'
+    - '**/index.js'
