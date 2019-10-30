@@ -50,26 +50,62 @@
 }
 
 .content-wrap {
-  background: white;
+  background: initial;
   border-radius: $border-radius-inner;
   box-shadow: $box-shadow-inner;
   box-sizing: border-box;
   float: right;
   min-height: 700px;
-  padding: $content-desktop-padding;
+  padding: initial;
   width: $content-wrap;
 
   +tablet() {
     border-radius: initial;
-    padding: 20px;
+    padding: initial;
     width: 100%;
   }
 
   +mobile() {
     border-radius: initial;
     min-height: auto;
-    padding: 20px;
+    padding: initial;
     width: 100%;
+  }
+}
+
+.post-eof{
+  display:none;
+}
+
+.post-block {
+  background: white;
+  border-radius: $border-radius-inner;
+  padding: $content-desktop-padding;
+
+  +tablet() {
+    border-radius: $border-radius;
+    padding: ($content-tablet-padding * 2);
+  }
+
+  +mobile() {
+    border-radius: $border-radius;
+    min-height: auto;
+    padding: $sidebar-offset;
+  }
+}
+
+// When blocks are siblings (homepage).
+#posts > article + article {
+  .post-block {
+    border-radius: $border-radius;
+    margin-top: $sidebar-offset;
+    +tablet() {
+      margin-top: $content-tablet-padding;
+    }
+
+    +mobile() {
+      margin-top: $content-mobile-padding;
+    }
   }
 }
 
