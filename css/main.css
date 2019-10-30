@@ -1457,11 +1457,11 @@ article:last-child .post-eof {
   display: none;
 }
 .posts-expand {
-  padding-top: 40px;
+  padding-top: 10px;
 }
 @media (max-width: 767px) {
   .posts-expand {
-    margin: 0 20px;
+    margin: 0 0;
   }
 }
 @media (min-width: 992px) {
@@ -1873,7 +1873,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #bdd170;
+  background: #ec2473;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2578,19 +2578,19 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .content-wrap {
-  background: #fff;
+  background: initial;
   border-radius: initial;
   box-shadow: initial;
   box-sizing: border-box;
   float: right;
   min-height: 700px;
-  padding: 40px;
+  padding: initial;
   width: calc(100% - 252px);
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .content-wrap {
     border-radius: initial;
-    padding: 20px;
+    padding: initial;
     width: 100%;
   }
 }
@@ -2598,8 +2598,43 @@ ul.breadcrumb li + li:last-child {
   .content-wrap {
     border-radius: initial;
     min-height: auto;
-    padding: 20px;
+    padding: initial;
     width: 100%;
+  }
+}
+.post-eof {
+  display: none;
+}
+.post-block {
+  background: #fff;
+  border-radius: initial;
+  padding: 40px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .post-block {
+    border-radius: initial;
+    padding: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .post-block {
+    border-radius: initial;
+    min-height: auto;
+    padding: 12px;
+  }
+}
+#posts > article + article .post-block {
+  border-radius: initial;
+  margin-top: 12px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #posts > article + article .post-block {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 767px) {
+  #posts > article + article .post-block {
+    margin-top: 8px;
   }
 }
 .sidebar {
